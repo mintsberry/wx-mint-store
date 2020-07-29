@@ -1,0 +1,16 @@
+<view class="container">
+  <c-grid l-class="inner-container">
+    <block wx:for="{{grid}}" wx:key="id">
+      <c-grid-item key="{{index}}" slot="{{index}}">
+        <view class="grid-item">
+          <image class="img" src="{{item.img}}">
+            
+          </image>
+          <text class="text" >
+            {{item.title}}
+          </text>
+        </view>
+      </c-grid-item>
+    </block>
+  </c-grid>
+</view>

@@ -2,7 +2,7 @@
   <image class="top-theme" src="{{themeA.entrance_img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
   </image>
   <swiper class="swiper" indicator-dots="{{true}}" indicator-active-color="#157658" autoplay="{{true}}" circular="{{true}}">
-    <block wx:for="{{bannerB.items}}">
+    <block wx:for="{{bannerB.items}}" wx:key="id">
       <swiper-item >
         <image class="swiper" src="{{item.img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
           
@@ -10,4 +10,5 @@
       </swiper-item>
     </block>
   </swiper>
+  <c-category-grid grid="{{grid}}" />
 </view>

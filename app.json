@@ -10,5 +10,9 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "c-grid": "./miniprogram_npm/lin-ui/grid/index",
+    "c-grid-item": "./miniprogram_npm/lin-ui/grid-item/index"
+  }
 }
