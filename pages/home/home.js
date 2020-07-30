@@ -1,6 +1,7 @@
 import { Theme } from "../../model/theme"
 import { Banner } from "../../model/banner"
 import { Category } from "../../model/category"
+import { Activity } from "../../model/activity"
 
 // pages/home/home.js
 Page({
@@ -10,8 +11,12 @@ Page({
    */
   data: {
     themeA: null,
+    themeE: null,
+    themeF: null,
+    themeH: null,
     bannerB: null,
-    grid: []
+    grid: [],
+    activity: null
   },
 
   /**
@@ -22,13 +27,23 @@ Page({
   },
 
   async initAllData() {
-    const themeA = await Theme.getHomeLocationA()
+    const theme = new Theme()
+    await theme.getThemeGroup()
+    const themeA = theme.getHomeLocationA()
+    const themeE = theme.getHomeLocationE()
+    const themeF = theme.getHomeLocationF()
+    const themeH = theme.getHomeLocationH()
     const bannerB = await Banner.getHomeLocationB()
-    const grid = await Category.getGridCategory()
+    const grid = await Category.getHomeLocationC()
+    const activity = await Activity.getHomeLocationD()
     this.setData({
-      themeA: themeA.data[0],
+      themeA,
+      themeE,
+      themeF,
+      themeH,
       bannerB: bannerB.data,
-      grid: grid.data
+      grid: grid.data,
+      activity: activity.data,
     })
   },
   /**

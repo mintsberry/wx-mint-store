@@ -11,4 +11,7 @@
     </block>
   </swiper>
   <c-category-grid grid="{{grid}}" />
+  <image class="activity" src="{{activity.entrance_img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
+    
+  </image>
 </view>
