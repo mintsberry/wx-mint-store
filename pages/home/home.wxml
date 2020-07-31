@@ -17,4 +17,7 @@
     theme="{{themeE}}"
     wx:if="{{themeE.online}}"
   />
+  <image src="{{themeF.entrance_img}}" class="quality" />
+  <c-hot-list banner="{{bannerG}}" />
+  <image src="{{themeH.entrance_img}}" class="fashion" />
 </view>
