@@ -1,0 +1,19 @@
+.container{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 42rpx 0 34rpx 28rpx;
+  background-color: #ffffff;
+}
+
+.title{
+  width: 694rpx;
+  height: 90rpx;
+}
+
+.scroll-view {
+  margin-top: 28rpx;
+}
+
+.scroll-inner {
+  display: flex;
+}

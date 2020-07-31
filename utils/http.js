@@ -4,7 +4,7 @@ import promisic from "./promisic"
 class Http {
   static async reqeust(url, data, method = 'GET') {
     url = config.apiBaseUrl + url 
-    return await promisic(wx.request)({
+    return (await promisic(wx.request)({
       url,
       data,
       header: {
@@ -15,7 +15,7 @@ class Http {
       dataType: 'json',
       responseType: 'text',
       complete: ()=>{}
-    })
+    })).data
   }
 }
 

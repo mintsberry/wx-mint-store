@@ -1,0 +1,5 @@
+<view class="container">
+  <image class="pic" src="{{spu.img}}" />
+  <text class="text">{{spu.title}}</text>
+  <c-price color="#157658" l-unit-class="price-unit" l-value-class="value-unit" value="{{spu.price}}" />
+</view>

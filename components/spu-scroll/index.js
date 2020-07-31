@@ -1,5 +1,10 @@
 Component({
   data: {},
-  properties: {},
-  methods: {}
+  properties: {
+    theme: Object,
+    spuList: Array
+  },
+  methods: {
+    
+  }
 })

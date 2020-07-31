@@ -1,3 +1,6 @@
 {
-  "component": true
+  "component": true,
+  "usingComponents": {
+    "c-spu-info": "../spu-info/index"
+  }
 }

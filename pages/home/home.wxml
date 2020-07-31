@@ -11,7 +11,10 @@
     </block>
   </swiper>
   <c-category-grid grid="{{grid}}" />
-  <image class="activity" src="{{activity.entrance_img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
-    
-  </image>
+  <image class="activity" src="{{activity.entrance_img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+  <c-spu-scroll
+    spu-list="{{themeESpu}}"
+    theme="{{themeE}}"
+    wx:if="{{themeE.online}}"
+  />
 </view>

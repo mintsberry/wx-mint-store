@@ -11,10 +11,9 @@ export class Theme {
   async getThemeGroup() {
     const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
     const url = `/theme/by/names`
-    this.themes =(await Http.reqeust(url, {
+    this.themes =await Http.reqeust(url, {
       names
-    })).data
-    console.log(this.themes)
+    })
   }
 
   getHomeLocationA() {
@@ -28,5 +27,14 @@ export class Theme {
   }
   getHomeLocationH() {
     return this.themes.find(el => el.name === Theme.locationH)
+  }
+
+  static getHomeLocationESpu() {
+    return Theme.getThemeDetailByName(Theme.locationE)
+  }
+
+  static getThemeDetailByName(name) {
+    const url = `/theme/name/${name}/with_spu`
+    return Http.reqeust(url)
   }
 }

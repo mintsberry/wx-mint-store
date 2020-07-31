@@ -13,6 +13,7 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "c-grid": "./miniprogram_npm/lin-ui/grid/index",
-    "c-grid-item": "./miniprogram_npm/lin-ui/grid-item/index"
+    "c-grid-item": "./miniprogram_npm/lin-ui/grid-item/index",
+    "c-price": "./miniprogram_npm/lin-ui/price/index"
   }
 }

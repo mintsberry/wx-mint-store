@@ -1,3 +1,11 @@
 <view class="container">
-  <slot></slot>
+  <image class="title" src="{{theme.title_img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
+  </image>
+  <scroll-view class="scroll-view" scroll-x="{{true}}">
+    <view class="scroll-inner">
+      <block wx:for="{{spuList}}" wx:key="id" >
+      <c-spu-info spu="{{item}}" />
+    </block>
+    </view>
+  </scroll-view>
 </view>

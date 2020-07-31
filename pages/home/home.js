@@ -14,9 +14,10 @@ Page({
     themeE: null,
     themeF: null,
     themeH: null,
+    activity: null,
     bannerB: null,
+    themeESpu: [],
     grid: [],
-    activity: null
   },
 
   /**
@@ -31,6 +32,11 @@ Page({
     await theme.getThemeGroup()
     const themeA = theme.getHomeLocationA()
     const themeE = theme.getHomeLocationE()
+    let themeESpu = []
+    if (themeE.online) {
+      const data = await Theme.getHomeLocationESpu()
+      themeESpu = data.spu_list.slice(0, 8)
+    }
     const themeF = theme.getHomeLocationF()
     const themeH = theme.getHomeLocationH()
     const bannerB = await Banner.getHomeLocationB()
@@ -41,9 +47,10 @@ Page({
       themeE,
       themeF,
       themeH,
-      bannerB: bannerB.data,
-      grid: grid.data,
-      activity: activity.data,
+      themeESpu,
+      bannerB,
+      grid,
+      activity,
     })
   },
   /**
