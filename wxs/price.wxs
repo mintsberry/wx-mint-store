@@ -1,0 +1,20 @@
+function slashedPrice (price, discountPrice) {
+  if (discountPrice) {
+    return price
+  } else {
+    return discountPrice
+  }
+}
+
+function mainPrice(price, discountPrice) {
+  if (discountPrice) {
+    return discountPrice
+  } else {
+    return price
+  }
+}
+
+module.exports = {
+  mainPrice: mainPrice,
+  slashedPrice: slashedPrice
+}

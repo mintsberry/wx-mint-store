@@ -14,6 +14,8 @@
   "usingComponents": {
     "c-grid": "./miniprogram_npm/lin-ui/grid/index",
     "c-grid-item": "./miniprogram_npm/lin-ui/grid-item/index",
-    "c-price": "./miniprogram_npm/lin-ui/price/index"
+    "c-price": "./miniprogram_npm/lin-ui/price/index",
+    "c-tag": "./miniprogram_npm/lin-ui/tag/index",
+    "c-loadmore": "./miniprogram_npm/lin-ui/loadmore/index"
   }
 }
