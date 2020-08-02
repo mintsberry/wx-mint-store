@@ -47,3 +47,7 @@
   height: 70rpx;
   margin-bottom: 38rpx;
 }
+
+.endload{
+  margin-left: 12rpx !important;
+}

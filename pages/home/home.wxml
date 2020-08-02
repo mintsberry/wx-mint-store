@@ -24,5 +24,5 @@
     <image class="title-spu-bottom" src="/images/home/title@interest.png"></image>
     <c-water-flow generic:l-water-flow-item="c-spu-preview"></c-water-flow>
   </view>
-  <c-loadmore show="{{true}}" type="{{loadType}}" line="{{true}}" loading-text="少女祈求中" end-text="薄荷小店" />
+  <c-loadmore show="{{true}}" type="{{loadType}}" line="{{true}}" loading-text="少女祈求中" end-text="🍀薄荷小店" l-end-class="endload"/>
 </view>

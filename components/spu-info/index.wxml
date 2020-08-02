@@ -1,5 +1,6 @@
+<wxs src="../../wxs/price.wxs" module="p" />
 <view class="container">
   <image class="pic" src="{{spu.img}}" />
   <text class="text">{{spu.title}}</text>
-  <c-price color="#157658" l-unit-class="price-unit" l-value-class="value-unit" value="{{spu.price}}" />
+  <c-price color="#157658" l-unit-class="price-unit" l-value-class="value-unit" value="{{p.mainPrice(spu.price, spu.discount_price)}}" />
 </view>
