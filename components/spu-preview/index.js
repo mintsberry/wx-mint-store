@@ -29,6 +29,16 @@ Component({
     //     width: 340,
     //     height: 340 * innerHeight / innerWidth
     //   })
-    // }
+    // },
+    tapItem() {
+      const pid = this.data.data.id
+      wx.navigateTo({
+        url: `../../pages/detail/detail?id=${pid}`,
+        success: (result)=>{
+        },
+        fail: ()=>{},
+        complete: ()=>{}
+      });
+    }
   }
 })

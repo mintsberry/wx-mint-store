@@ -1,0 +1,9 @@
+<view class="container">
+  <view>
+    <block wx:for="{{fences}}" wx:key="index">
+      <c-fence fence="{{item}}"></c-fence>
+    </block>
+  </view>
+  <view class="count-container">
+  </view>
+</view>
