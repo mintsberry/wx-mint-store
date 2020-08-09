@@ -12,10 +12,10 @@ export class Fence {
     this.specs = specs
   }
 
-  init() {
-    console.log
-    this.specs.forEach(el => {
-      const fenceCell = new FenceCell(el.value_id, el.value)
+  init(row) {
+    console.log(this.specs)
+    this.specs.forEach((el, col) => {
+      const fenceCell = new FenceCell(el.value_id, el.value, row, col)
       this.values.push(fenceCell)
     })
   }

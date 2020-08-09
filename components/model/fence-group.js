@@ -15,12 +15,13 @@ export class FenceGroup {
     let matrix = this._createMatrix(this.skuList)
     let AT = matrix.transpose() //转置
     let m = this._distinct(AT) //去重
-    m.forEach(f => {  //获取转置后每一列
+    m.forEach((f, row) => {  //获取转置后每一列
       let fence = new Fence(f[0].key_id, f[0].key, f)
-      fence.init()
+      fence.init(row)
       fences.push(fence)
     })
     this.fences = fences
+    console.log(this.fences)
   }
 
   _createMatrix(skuList) {

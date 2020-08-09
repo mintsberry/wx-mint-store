@@ -3,5 +3,14 @@ Component({
   properties: {
     cell: Object
   },
-  methods: {}
+  methods: {
+    onTap() {
+      this.triggerEvent('celltap', {
+        cell: this.properties.cell
+      }, {
+          bubbles: true,
+          composed: true
+      })
+    }
+  }
 })
