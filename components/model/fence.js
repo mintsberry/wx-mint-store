@@ -15,7 +15,7 @@ export class Fence {
   init(row) {
     console.log(this.specs)
     this.specs.forEach((el, col) => {
-      const fenceCell = new FenceCell(el.value_id, el.value, row, col)
+      const fenceCell = new FenceCell(el.value_id, el.value, this.specs[col], row, col)
       this.values.push(fenceCell)
     })
   }

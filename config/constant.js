@@ -6,4 +6,5 @@ export const loadType = {
 export const cellStatus = {
   forbidden: 'forbidden',
   selected: 'selected',
+  unselected: 'unselected'
 }
