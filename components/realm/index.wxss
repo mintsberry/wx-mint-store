@@ -1,1 +1,69 @@
 /* components/realm/index.wxss */
+.container{ 
+  box-sizing: border-box;
+  padding:30rpx;
+  background-color: #ffffff;
+  max-height:1000rpx;
+  min-height: 700rpx;
+  margin-bottom: 100rpx;
+}
+
+.sku-preview {
+  display: flex;
+}
+
+.sku-img{
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.stock {
+  margin-left:30rpx;
+  font-size: 20rpx;
+  color: #999;
+}
+
+.stock-pinch{
+  margin-left:30rpx;
+  font-size: 20rpx;
+  color: #D20109;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 40rpx;
+}
+
+.price-row{
+  display: flex;
+  align-items: baseline;
+}
+
+.discount-price {
+  margin-left: 20rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.pending{
+  font-size:20rpx;
+  margin-top: 8rpx;
+}
+
+.pending > text:first-child{
+  color:#999999;
+}
+
+.pending > text:nth-child(2){
+  color:#666666;
+}
+
+.title {
+  font-size: 32rpx;
+}

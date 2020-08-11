@@ -1,6 +1,7 @@
 const { FenceGroup } = require("../model/fence-group")
 const { cellStatus } = require("../../config/constant")
 const { ArrayUtil } = require("../../utils/array-util")
+const { Spu } = require("../../model/spu")
 
 // components/realm/index.js
 Component({
@@ -17,19 +18,32 @@ Component({
   data: {
     fences: [],
     selected: [],
-    codes: []
+    codes: [],
+    fenceGroup: null,
+    selectSpu: null,
+    noSpec: false,
+    isSelectedAll: false,
+    tipInfo: null
   },
 
   observers: {
     'spu': function(spu) {
       if (!spu) return 
+      if (Spu.isNoSpec(spu)) {
+        this.setData({
+          noSpec: true,
+          selectSpu: spu.sku_list[0]
+        })
+        return 
+      }
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
-      //将所有sku所有code组成数组
-      this._initCodes(spu)
       this.setData({
-        fences: fenceGroup.fences
+        fences: fenceGroup.fences,
+        fenceGroup: fenceGroup
       })
+      this._initCodes(spu)  //将所有sku所有code组成数组
+      this._initDefaultSelected(spu) //初始化默认选择
     }
   },
   /**
@@ -51,26 +65,8 @@ Component({
       this._changeCellStatus()
       //计算可选项
       this._calcOptionalSku()
-      this.setData({
-        fences
-      })
-    },
-    removeSelect(cell) {
-      this.data.selected[cell.row] = null
-    },
-    insertSelect(cell) {
-      this.data.selected[cell.row] = cell
-    },
-    _changeCellStatus() {
-      this.data.selected.forEach(cell => {
-        if (!cell) return 
-        this.data.fences[cell.row].values[cell.col].status = cellStatus.selected
-      })
-    },
-    _currentRowInit(row) {
-      this.data.fences[row].values.forEach(el => {
-        el.status = cellStatus.unselected
-      })
+      this._changeDescOfSelected()
+      this._refreshStyle()
     },
     _initCodes(spu) {
       const list = spu.sku_list
@@ -81,6 +77,28 @@ Component({
       this.setData({
         codes
       })
+    },
+    _initDefaultSelected(spu) {
+      if (!spu.default_sku_id) return
+      const sku_id = spu.default_sku_id //获取默认的sku id
+      const defalutSpu = spu.sku_list.find((item) => {
+        return item.id === sku_id
+      })
+      this.setData({
+        selectSpu: defalutSpu
+      })
+      const specs = defalutSpu.specs
+      this.data.fences.forEach((fence, index) => {
+        const id = specs[index].value_id //获取默认商品属性id
+        const cell = fence.values.find(cell => {
+          return cell.id === id
+        })
+        cell.status = cellStatus.selected
+        this.data.selected[cell.row] = cell
+      })
+      this._calcOptionalSku()
+      this._changeDescOfSelected()
+      this._refreshStyle()
     },
     _calcOptionalSku() {
       const fences = this.data.fences
@@ -102,6 +120,36 @@ Component({
         })
       })
     },
+    _changeDescOfSelected() {
+      let isSelectedAll = false
+      let tipInfo = null
+      if (ArrayUtil.NotEmptyLength(this.data.selected) === this.data.fences.length) {  //全选
+        //获取选中的商品信息
+        isSelectedAll = true
+        tipInfo = this.data.selected.map(el => {
+          return el.title
+        }).toString()
+        let code = this._jointCode(this.data.selected).join('#')
+        let selectSpu = this.data.fenceGroup.skuList.find(el => {
+          return el.code.includes(code)
+        })
+        this.setData({
+          selectSpu
+        })
+      } else {  //未选完整
+        let unselected = []
+        for(let i = 0; i < this.data.fences.length; i++) {
+          if (!this.data.selected[i]) {
+            unselected.push(this.data.fences[i].attr)
+          }
+        }
+        tipInfo = unselected.toString()
+      }
+      this.setData({
+        isSelectedAll,
+        tipInfo
+      })
+    },
     _jointCode(array) {
       let code = []
       array.forEach(el => {
@@ -118,6 +166,28 @@ Component({
         return selected.every(item => {
           return el.includes(item)
         })
+      })
+    },
+    removeSelect(cell) {
+      this.data.selected[cell.row] = null
+    },
+    insertSelect(cell) {
+      this.data.selected[cell.row] = cell
+    },
+    _changeCellStatus() {
+      this.data.selected.forEach(cell => {
+        if (!cell) return 
+        this.data.fences[cell.row].values[cell.col].status = cellStatus.selected
+      })
+    },
+    _currentRowInit(row) {
+      this.data.fences[row].values.forEach(el => {
+        el.status = cellStatus.unselected
+      })
+    },
+    _refreshStyle() {
+      this.setData({
+        fences: this.data.fences
       })
     },
   }
