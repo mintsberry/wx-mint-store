@@ -23,7 +23,7 @@ Component({
     selectSpu: null,
     noSpec: false,
     isSelectedAll: false,
-    tipInfo: null
+    tipInfo: undefined
   },
 
   observers: {
@@ -44,6 +44,7 @@ Component({
       })
       this._initCodes(spu)  //将所有sku所有code组成数组
       this._initDefaultSelected(spu) //初始化默认选择
+      this._changeDescOfSelected()
     }
   },
   /**
@@ -79,7 +80,13 @@ Component({
       })
     },
     _initDefaultSelected(spu) {
-      if (!spu.default_sku_id) return
+      if (!spu.default_sku_id) {
+        this._changeDescOfSelected()
+        this.setData({
+          selectSpu: spu
+        })
+        return
+      }
       const sku_id = spu.default_sku_id //获取默认的sku id
       const defalutSpu = spu.sku_list.find((item) => {
         return item.id === sku_id
@@ -97,7 +104,6 @@ Component({
         this.data.selected[cell.row] = cell
       })
       this._calcOptionalSku()
-      this._changeDescOfSelected()
       this._refreshStyle()
     },
     _calcOptionalSku() {

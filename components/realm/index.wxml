@@ -20,7 +20,7 @@
             value="{{selectSpu.price}}">
           </c-price>
           <view wx:if="{{selectSpu.stock && selectSpu.stock >= 10}}" class="stock">库存：{{selectSpu.stock}} 件</view>
-          <view wx:if="{{selectSpu.stock && selectSpu.stock < 10 && selectSpu.stock !=0 }}" class="stock-pinch">仅剩：{{selectSpu.stock}} 件</view>
+          <view wx:if="{{selectSpu.stock && selectSpu.stock < 10 && selectSpu.stock !=0 }}" class="stock-pinch">仅剩：{{stock}} 件</view>
         </view>
         <view wx:if="{{!noSpec}}" class="pending">
             <text wx:if="{{!isSelectedAll}}">请选择：</text>
