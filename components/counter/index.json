@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "c-counter": "../../miniprogram_npm/lin-ui/count-selector/index"
+  }
+}

@@ -21,7 +21,7 @@ Page({
     activity: null,
     bannerB: null,
     spuPaging: null,
-    loadType: loadType.loading,
+    loadType: loadType.LOADING,
     themeESpu: [],
     grid: [],
   },
@@ -120,7 +120,7 @@ Page({
     wx.lin.renderWaterFlow(data.items)
     if (!data.moreData) {
       this.setData({
-        loadType: loadType.end
+        loadType: loadType.END
       })
     }
   },

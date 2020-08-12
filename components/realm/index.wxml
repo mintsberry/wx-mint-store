@@ -1,40 +1,58 @@
 <view class="container">
-  <view class="sku-preview" >
-    <image class="sku-img" src="{{selectSpu.img}}" />
-    <view class="desc">
-      <text class="title">{{selectSpu.title}}</text>
-      <view>
-        <view class="info">
-          <c-price
-            value="{{selectSpu.discount_price || selectSpu.price}}"
-            color="#157658"
-            value-size="28"
-            autofix>
-          </c-price>
-          <c-price
-            wx:if="{{selectSpu.discount_price}}"
-            deleted
-            color="#999999"
-            value-size="26"
-            l-class="discount-price"
-            value="{{selectSpu.price}}">
-          </c-price>
-          <view wx:if="{{selectSpu.stock && selectSpu.stock >= 10}}" class="stock">库存：{{selectSpu.stock}} 件</view>
-          <view wx:if="{{selectSpu.stock && selectSpu.stock < 10 && selectSpu.stock !=0 }}" class="stock-pinch">仅剩：{{stock}} 件</view>
-        </view>
-        <view wx:if="{{!noSpec}}" class="pending">
-            <text wx:if="{{!isSelectedAll}}">请选择：</text>
-            <text wx:else>已选：</text>
-            <text>{{tipInfo}}</text>
+  <view class="sku">
+    <view class="sku-preview" >
+      <image class="sku-img" src="{{selectSpu.img}}" />
+      <view class="desc">
+        <text class="title">{{selectSpu.title}}</text>
+        <view>
+          <view class="info">
+            <c-price
+              value="{{selectSpu.discount_price || selectSpu.price}}"
+              color="#157658"
+              value-size="28"
+              autofix>
+            </c-price>
+            <c-price
+              wx:if="{{selectSpu.discount_price}}"
+              deleted
+              color="#999999"
+              value-size="26"
+              l-class="discount-price"
+              value="{{selectSpu.price}}">
+            </c-price>
+            <view wx:if="{{selectSpu.stock && selectSpu.stock >= 10}}" class="stock">库存：{{selectSpu.stock}} 件</view>
+            <view wx:if="{{selectSpu.stock && selectSpu.stock < 10 || selectSpu.stock === 0  }}" class="stock-pinch">仅剩：{{selectSpu.stock}} 件</view>
+          </view>
+          <view wx:if="{{!noSpec}}" class="pending">
+              <text wx:if="{{!isSelectedAll}}">请选择：</text>
+              <text wx:else>已选：</text>
+              <text>{{tipInfo}}</text>
+          </view>
         </view>
       </view>
     </view>
+    <view>
+      <block wx:for="{{fences}}" wx:key="index">
+        <c-fence fence="{{item}}" bind:celltap="tapSku"></c-fence>
+      </block>
+    </view>
+    <view class="count-container">
+      <text class="counter-text">请选择数量</text>
+      <c-counter  bind:lintap="onSelectCount"/>
+    </view>
   </view>
-  <view>
-    <block wx:for="{{fences}}" wx:key="index">
-      <c-fence fence="{{item}}" bind:celltap="tapSku"></c-fence>
-    </block>
+  <view wx:if="{{!isSelectedAll}}" class="bottom-btn unselect">
+      <text>请选择规格</text>
   </view>
-  <view class="count-container">
+
+  <view wx:elif="{{!outStock}}" class="bottom-btn buy">
+    <!-- <text wx:if="{{orderWay==='cart'}}">加入购物车</text> -->
+    <text>立即购买</text>
   </view>
+
+  <view wx:else class="bottom-btn out-stock">
+      <text>暂时缺货</text>
+  </view>
+
+
 </view>

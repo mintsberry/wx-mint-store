@@ -1,11 +1,15 @@
 /* components/realm/index.wxss */
 .container{ 
   box-sizing: border-box;
-  padding:30rpx;
+  /* padding:30rpx; */
   background-color: #ffffff;
   max-height:1000rpx;
   min-height: 700rpx;
   margin-bottom: 100rpx;
+}
+
+.sku{
+  padding: 30rpx 30rpx 0 30rpx;
 }
 
 .sku-preview {
@@ -66,4 +70,44 @@
 
 .title {
   font-size: 32rpx;
+}
+
+.count-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+  padding-bottom: 200rpx;
+}
+
+.counter-text {
+  font-size: 24rpx;
+  color: #555;
+}
+
+.bottom-btn{
+  position: absolute;
+  bottom: 0;
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100rpx;
+}
+
+.bottom-btn text{
+  color: #ffffff;
+}
+
+.unselect {
+  background-color: #00b894;
+}
+
+.buy {
+  background-color: #333333;
+}
+
+.out-stock {
+  background-color: #b2bec3;
 }

@@ -1,5 +1,5 @@
 const { FenceGroup } = require("../model/fence-group")
-const { cellStatus } = require("../../config/constant")
+const { cellStatus, cartCount } = require("../../config/constant")
 const { ArrayUtil } = require("../../utils/array-util")
 const { Spu } = require("../../model/spu")
 
@@ -23,6 +23,8 @@ Component({
     selectSpu: null,
     noSpec: false,
     isSelectedAll: false,
+    count: cartCount.COUNT,
+    outStock: false,
     tipInfo: undefined
   },
 
@@ -45,6 +47,7 @@ Component({
       this._initCodes(spu)  //将所有sku所有code组成数组
       this._initDefaultSelected(spu) //初始化默认选择
       this._changeDescOfSelected()
+      this._caclStock()
     }
   },
   /**
@@ -54,8 +57,8 @@ Component({
     tapSku(event) {
       const cell = event.detail.cell
       let fences = this.data.fences
-      if (cell.status === cellStatus.forbidden)  return
-      if (cell.status === cellStatus.selected) {
+      if (cell.status === cellStatus.FORBIDDEN)  return
+      if (cell.status === cellStatus.SELECTED) {
         this.removeSelect(fences[cell.row].values[cell.col])
       } else {
         this.insertSelect(fences[cell.row].values[cell.col])
@@ -64,9 +67,12 @@ Component({
       this._currentRowInit(cell.row)
       //将所有选中cell 改成selected状态
       this._changeCellStatus()
-      //计算可选项
+      //计算商品规格可选项
       this._calcOptionalSku()
+      //根据所选规格显示参数
       this._changeDescOfSelected()
+      //计算库存
+      this._caclStock()
       this._refreshStyle()
     },
     _initCodes(spu) {
@@ -100,7 +106,7 @@ Component({
         const cell = fence.values.find(cell => {
           return cell.id === id
         })
-        cell.status = cellStatus.selected
+        cell.status = cellStatus.SELECTED
         this.data.selected[cell.row] = cell
       })
       this._calcOptionalSku()
@@ -114,14 +120,14 @@ Component({
         let selected = this.data.selected.slice()
         fence.values.forEach((cell, col) => {
           //对于已经选中的无需判定
-          if (cell.status === cellStatus.selected) return 
+          if (cell.status === cellStatus.SELECTED) return 
           selected[row] = cell
           const code = this._jointCode(selected)  //所选的sku拼接成字符串数组
           const flag = this._includeCode(code)  //判断sku是否包含在codes中
           if (flag) {
-            cell.status = cellStatus.unselected
+            cell.status = cellStatus.UNSELECTED
           } else {
-            cell.status = cellStatus.forbidden
+            cell.status = cellStatus.FORBIDDEN
           }
         })
       })
@@ -155,6 +161,13 @@ Component({
         isSelectedAll,
         tipInfo
       })
+    },    
+    onSelectCount(event) {
+      const currentCount = event.detail.count
+      this.data.count = currentCount
+      if(this.data.isSelectedAll){
+        this._caclStock()
+      }
     },
     _jointCode(array) {
       let code = []
@@ -180,15 +193,25 @@ Component({
     insertSelect(cell) {
       this.data.selected[cell.row] = cell
     },
+    _caclStock() {
+      if (!this.data.isSelectedAll) return
+      let outStock = false
+      if (this.data.selectSpu.stock < this.data.count) {
+        outStock = true
+      }
+      this.setData({
+        outStock
+      })
+    },
     _changeCellStatus() {
       this.data.selected.forEach(cell => {
         if (!cell) return 
-        this.data.fences[cell.row].values[cell.col].status = cellStatus.selected
+        this.data.fences[cell.row].values[cell.col].status = cellStatus.SELECTED
       })
     },
     _currentRowInit(row) {
       this.data.fences[row].values.forEach(el => {
-        el.status = cellStatus.unselected
+        el.status = cellStatus.UNSELECTED
       })
     },
     _refreshStyle() {

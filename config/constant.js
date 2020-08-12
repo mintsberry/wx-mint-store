@@ -1,10 +1,16 @@
 export const loadType = {
-  loading: "loading",
-  end: "end"
+  LOADING: "loading",
+  END: "end",
 }
 
 export const cellStatus = {
-  forbidden: 'forbidden',
-  selected: 'selected',
-  unselected: 'unselected'
+  FORBIDDEN: 'forbidden',
+  SELECTED: 'selected',
+  UNSELECTED: 'unselected',
+}
+
+export const cartCount = {
+  COUNT: 1,
+  MIN: 1,
+  MAX: 99,
 }
