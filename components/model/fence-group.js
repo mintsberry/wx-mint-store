@@ -15,9 +15,13 @@ export class FenceGroup {
     let matrix = this._createMatrix(this.skuList)
     let AT = matrix.transpose() //转置
     let m = this._distinct(AT) //去重
+    let sketchId = this.spu.sketch_spec_id
     m.forEach((f, row) => {  //获取转置后每一列
       let fence = new Fence(f[0].key_id, f[0].key, f)
       fence.init(row)
+      if (sketchId === f[0].key_id) {  //可视化id与fence属性id相同 
+        fence.setFenceCellImg(this.skuList) 
+      }
       fences.push(fence)
     })
     this.fences = fences

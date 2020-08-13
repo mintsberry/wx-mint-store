@@ -40,15 +40,16 @@ Component({
         return 
       }
       const fenceGroup = new FenceGroup(spu)
-      fenceGroup.initFences()
+      fenceGroup.initFences() //将商品可以选参数归类
       this.setData({
         fences: fenceGroup.fences,
         fenceGroup: fenceGroup
       })
       this._initCodes(spu)  //将所有sku所有code组成数组
       this._initDefaultSelected(spu) //初始化默认选择
-      this._changeDescOfSelected()
+      this._changeDescOfSelected() //根据选中更改商品信息
       this._caclStock()
+      console.log(this.data.fences)
     }
   },
   /**

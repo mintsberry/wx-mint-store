@@ -4,6 +4,7 @@ export class FenceCell {
   id
   status
   spec
+  img
   row
   col
   constructor(id, title, spec, row, col) {
@@ -12,5 +13,9 @@ export class FenceCell {
     this.spec = spec
     this.row = row
     this.col = col
+  }
+
+  setImg(img) {
+    this.img = img
   }
 }
