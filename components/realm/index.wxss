@@ -5,7 +5,6 @@
   background-color: #ffffff;
   max-height:1000rpx;
   min-height: 700rpx;
-  margin-bottom: 100rpx;
 }
 
 .sku{
@@ -19,6 +18,7 @@
 .sku-img{
   width: 160rpx;
   height: 160rpx;
+  flex-shrink: 0;
 }
 
 .stock {
@@ -60,11 +60,11 @@
   margin-top: 8rpx;
 }
 
-.pending > text:first-child{
+.pending > .text:first-child{
   color:#999999;
 }
 
-.pending > text:nth-child(2){
+.pending > .text:nth-child(2){
   color:#666666;
 }
 
@@ -96,7 +96,7 @@
   height: 100rpx;
 }
 
-.bottom-btn text{
+.bottom-btn>.text{
   color: #ffffff;
 }
 

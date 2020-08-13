@@ -1,4 +1,6 @@
 <view class="detail" hover-class="none" hover-stop-propagation="false">
-  <c-tabbar />
-  <!-- <c-realm spu="{{spu}}" /> -->
+  <c-popup content-align="bottom" show="{{showRealm}}">
+    <c-realm orderWay="{{orderWay}}" spu="{{spu}}"></c-realm>
+  </c-popup>
+  <c-tabbar class="tabbar" bind:gotohome="onGotoHome" bind:gotocart="onGotoCart" bind:addtocart="onAddToCart" bind:buy="onBuy"></c-tabbar>
 </view>

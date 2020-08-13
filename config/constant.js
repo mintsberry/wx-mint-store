@@ -14,3 +14,8 @@ export const cartCount = {
   MIN: 1,
   MAX: 99,
 }
+
+export const orderWay = {
+  CART: 'cart',
+  BUY: 'buy'
+}

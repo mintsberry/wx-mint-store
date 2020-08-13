@@ -1,4 +1,4 @@
-<view class="container">
+<scroll-view class="container">
   <view class="sku">
     <view class="sku-preview" >
       <image class="sku-img" src="{{selectSpu.img}}" />
@@ -24,9 +24,9 @@
             <view wx:if="{{selectSpu.stock && selectSpu.stock < 10 || selectSpu.stock === 0  }}" class="stock-pinch">仅剩：{{selectSpu.stock}} 件</view>
           </view>
           <view wx:if="{{!noSpec}}" class="pending">
-              <text wx:if="{{!isSelectedAll}}">请选择：</text>
-              <text wx:else>已选：</text>
-              <text>{{tipInfo}}</text>
+              <text class="text" wx:if="{{!isSelectedAll}}">请选择：</text>
+              <text class="text" wx:else>已选：</text>
+              <text class="text">{{tipInfo}}</text>
           </view>
         </view>
       </view>
@@ -42,17 +42,17 @@
     </view>
   </view>
   <view wx:if="{{!isSelectedAll}}" class="bottom-btn unselect">
-      <text>请选择规格</text>
+      <text class="text">请选择规格</text>
   </view>
 
   <view wx:elif="{{!outStock}}" class="bottom-btn buy">
-    <!-- <text wx:if="{{orderWay==='cart'}}">加入购物车</text> -->
-    <text>立即购买</text>
+    <text wx:if="{{orderWay==='cart'}}" class="text">加入购物车</text>
+    <text wx:else class="text">立即购买</text>
   </view>
 
   <view wx:else class="bottom-btn out-stock">
-      <text>暂时缺货</text>
+      <text class="text">暂时缺货</text>
   </view>
 
 
-</view>
+</scroll-view>

@@ -1,28 +1,18 @@
-const {
-  Spu
-} = require("../../model/spu")
-const { orderWay } = require("../../config/constant")
-
-// pages/detail/detail.js
+// pages/category.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    spu: null,
-    orderWay: null,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    const id = options.id
-    const spu = await Spu.getDetailById(id)
-    this.setData({
-      spu
-    })
+  onLoad: function (options) {
+
   },
 
   /**
@@ -72,32 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-
-  onAddToCart(event) {
-    this.setData({
-      showRealm: true,
-      orderWay: orderWay.CART
-    })
-  },
-
-  onBuy(event) {
-    this.setData({
-      showRealm: true,
-      orderWay: orderWay.BUY
-    })
-  },
-
-  onGotoHome(event) {
-    wx.switchTab({
-      url: '/pages/home/home'
-    })
-  },
-
-  onGotoCart(event) {
-    wx.switchTab({
-      url: '/pages/cart/cart'
-    })
-  },
+  }
 })

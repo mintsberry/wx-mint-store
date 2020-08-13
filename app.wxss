@@ -15,3 +15,23 @@ page {
   font-size: 32rpx;
   color: #333;
 }
+
+@font-face {
+  font-family: 'mint-store';  /* project id 2003101 */ 
+  src: url('//at.alicdn.com/t/font_2003101_nnh63bripp.eot');
+  src: url('//at.alicdn.com/t/font_2003101_nnh63bripp.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2003101_nnh63bripp.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2003101_nnh63bripp.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2003101_nnh63bripp.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2003101_nnh63bripp.svg#mint-store') format('svg');
+}
+
+.iconfont {
+  font-family: "mint-store" !important;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.l-icon-home:before{
+  content: '\e626';
+}
