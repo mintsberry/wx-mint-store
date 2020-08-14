@@ -2,6 +2,8 @@
   "usingComponents": {
     "c-realm": "../../components/realm/index",
     "c-tabbar": "../../components/tab-bar/index",
-    "c-popup": "../../miniprogram_npm/lin-ui/popup/index"
+    "c-popup": "../../miniprogram_npm/lin-ui/popup/index",
+    "c-spu-description": "../../components/spu-description/index",
+    "c-sale-explain": "../../components/sale-explain/index"
   }
 }

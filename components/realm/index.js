@@ -1,7 +1,16 @@
-const { FenceGroup } = require("../model/fence-group")
-const { cellStatus, cartCount } = require("../../config/constant")
-const { ArrayUtil } = require("../../utils/array-util")
-const { Spu } = require("../../model/spu")
+const {
+  FenceGroup
+} = require("../model/fence-group")
+const {
+  cellStatus,
+  cartCount
+} = require("../../config/constant")
+const {
+  ArrayUtil
+} = require("../../utils/array-util")
+const {
+  Spu
+} = require("../../model/spu")
 
 // components/realm/index.js
 Component({
@@ -30,14 +39,14 @@ Component({
   },
 
   observers: {
-    'spu': function(spu) {
-      if (!spu) return 
+    'spu': function (spu) {
+      if (!spu) return
       if (Spu.isNoSpec(spu)) {
         this.setData({
           noSpec: true,
           selectSpu: spu.sku_list[0]
         })
-        return 
+        return
       }
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences() //将商品可以选参数归类
@@ -45,11 +54,11 @@ Component({
         fences: fenceGroup.fences,
         fenceGroup: fenceGroup
       })
-      this._initCodes(spu)  //将所有sku所有code组成数组
+      this._initCodes(spu) //将所有sku所有code组成数组
       this._initDefaultSelected(spu) //初始化默认选择
       this._changeDescOfSelected() //根据选中更改商品信息
       this._caclStock()
-      console.log(this.data.fences)
+      this.triggerSpecEvent()
     }
   },
   /**
@@ -59,7 +68,7 @@ Component({
     tapSku(event) {
       const cell = event.detail.cell
       let fences = this.data.fences
-      if (cell.status === cellStatus.FORBIDDEN)  return
+      if (cell.status === cellStatus.FORBIDDEN) return
       if (cell.status === cellStatus.SELECTED) {
         this.removeSelect(fences[cell.row].values[cell.col])
       } else {
@@ -76,6 +85,7 @@ Component({
       //计算库存
       this._caclStock()
       this._refreshStyle()
+      this.triggerSpecEvent()
     },
     _initCodes(spu) {
       const list = spu.sku_list
@@ -99,6 +109,13 @@ Component({
       const defalutSpu = spu.sku_list.find((item) => {
         return item.id === sku_id
       })
+      if (!defalutSpu) {
+        this._changeDescOfSelected()
+        this.setData({
+          selectSpu: spu
+        })
+        return
+      }
       this.setData({
         selectSpu: defalutSpu
       })
@@ -122,10 +139,10 @@ Component({
         let selected = this.data.selected.slice()
         fence.values.forEach((cell, col) => {
           //对于已经选中的无需判定
-          if (cell.status === cellStatus.SELECTED) return 
+          if (cell.status === cellStatus.SELECTED) return
           selected[row] = cell
-          const code = this._jointCode(selected)  //所选的sku拼接成字符串数组
-          const flag = this._includeCode(code)  //判断sku是否包含在codes中
+          const code = this._jointCode(selected) //所选的sku拼接成字符串数组
+          const flag = this._includeCode(code) //判断sku是否包含在codes中
           if (flag) {
             cell.status = cellStatus.UNSELECTED
           } else {
@@ -137,7 +154,7 @@ Component({
     _changeDescOfSelected() {
       let isSelectedAll = false
       let tipInfo = null
-      if (ArrayUtil.NotEmptyLength(this.data.selected) === this.data.fences.length) {  //全选
+      if (ArrayUtil.NotEmptyLength(this.data.selected) === this.data.fences.length) { //全选
         //获取选中的商品信息
         isSelectedAll = true
         tipInfo = this.data.selected.map(el => {
@@ -150,9 +167,9 @@ Component({
         this.setData({
           selectSpu
         })
-      } else {  //未选完整
+      } else { //未选完整
         let unselected = []
-        for(let i = 0; i < this.data.fences.length; i++) {
+        for (let i = 0; i < this.data.fences.length; i++) {
           if (!this.data.selected[i]) {
             unselected.push(this.data.fences[i].attr)
           }
@@ -163,18 +180,18 @@ Component({
         isSelectedAll,
         tipInfo
       })
-    },    
+    },
     onSelectCount(event) {
       const currentCount = event.detail.count
       this.data.count = currentCount
-      if(this.data.isSelectedAll){
+      if (this.data.isSelectedAll) {
         this._caclStock()
       }
     },
     _jointCode(array) {
       let code = []
       array.forEach(el => {
-        if (!el) return 
+        if (!el) return
         let spec = el.spec
         let str = spec.key_id + '-' + spec.value_id
         code.push(str)
@@ -207,7 +224,7 @@ Component({
     },
     _changeCellStatus() {
       this.data.selected.forEach(cell => {
-        if (!cell) return 
+        if (!cell) return
         this.data.fences[cell.row].values[cell.col].status = cellStatus.SELECTED
       })
     },
@@ -221,5 +238,19 @@ Component({
         fences: this.data.fences
       })
     },
+    triggerSpecEvent() {
+      const noSpec = Spu.isNoSpec(this.properties.spu)
+      if (noSpec) {
+        this.triggerEvent('specchange', {
+          noSpec
+        })
+      } else {
+        this.triggerEvent('specchange', {
+          noSpec: this.data.noSpec,
+          isSelectedAll: this.data.isSelectedAll,
+          tipInfo: this.data.tipInfo,
+        })
+      }
+    }
   }
 })

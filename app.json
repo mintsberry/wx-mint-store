@@ -55,6 +55,7 @@
     "c-icon": "./miniprogram_npm/lin-ui/icon/index",
     "c-badge": "/miniprogram_npm/lin-ui/badge/index",
     "c-loadmore": "./miniprogram_npm/lin-ui/loadmore/index",
-    "c-counter": "./components/counter/index"
+    "c-counter": "./components/counter/index",
+    "c-button": "./miniprogram_npm/lin-ui/button/index"
   }
 }

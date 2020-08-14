@@ -1,6 +1,40 @@
 <view class="detail" hover-class="none" hover-stop-propagation="false">
+  <scroll-view class="scroll"scroll-y>
+    <swiper class="top"
+            autoplay
+            indicator-dots>
+        <block wx:for="{{spu.spu_img_list}}" wx:key="index">
+            <swiper-item>
+                <image class="top" mode="aspectFill" src="{{item.img}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <c-spu-description spu="{{spu}}"></c-spu-description>
+
+    <view bind:tap="onAddToCart" wx:if="{{!specs.noSpec}}" class="sku-pending">
+        <view class="specs">
+          <text class="text" wx:if="{{!specs.isSelectedAll}}">请选择：</text>
+          <text class="text" wx:else>已选：</text>
+          <text class="text">{{specs.tipInfo}}</text>
+        </view>
+        <view class="arrow-right">
+            <c-icon name="right" color="#157658" size="24"></c-icon>
+        </view>
+    </view>
+
+    <view class="explain">
+        <c-sale-explain texts="{{explain}}"></c-sale-explain>
+    </view>
+
+    <view class="detail-img-container">
+        <block wx:for="{{spu.spu_detail_img_list}}" wx:key="index">
+            <image mode="widthFix" class="detail-img" src="{{item.img}}"></image>
+        </block>
+    </view>
+  </scroll-view>
   <c-popup content-align="bottom" show="{{showRealm}}">
-    <c-realm orderWay="{{orderWay}}" spu="{{spu}}"></c-realm>
+    <c-realm bind:specchange="onSpecChange" orderWay="{{orderWay}}" spu="{{spu}}"></c-realm>
   </c-popup>
   <c-tabbar class="tabbar" bind:gotohome="onGotoHome" bind:gotocart="onGotoCart" bind:addtocart="onAddToCart" bind:buy="onBuy"></c-tabbar>
 </view>

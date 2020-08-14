@@ -25,7 +25,6 @@ export class FenceGroup {
       fences.push(fence)
     })
     this.fences = fences
-    console.log(this.fences)
   }
 
   setCellStatusById(cellId, status) {

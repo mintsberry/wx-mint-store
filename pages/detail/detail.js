@@ -1,7 +1,10 @@
 const {
   Spu
 } = require("../../model/spu")
-const { orderWay } = require("../../config/constant")
+const {
+  orderWay
+} = require("../../config/constant")
+const { SaleExplain } = require("../../model/sale-explain")
 
 // pages/detail/detail.js
 Page({
@@ -20,8 +23,10 @@ Page({
   onLoad: async function (options) {
     const id = options.id
     const spu = await Spu.getDetailById(id)
+    const explain = await SaleExplain.getFixed(explain)
     this.setData({
-      spu
+      spu,
+      explain
     })
   },
 
@@ -98,6 +103,12 @@ Page({
   onGotoCart(event) {
     wx.switchTab({
       url: '/pages/cart/cart'
+    })
+  },
+
+  onSpecChange(event) {
+    this.setData({
+      specs: event.detail
     })
   },
 })
