@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "c-segment": "../../miniprogram_npm/lin-ui/segment/index",
+    "c-segment-item": "../../miniprogram_npm/lin-ui/segment-item/index",
+    "c-sub-category": "../../components/sub-category/index"
+  }
 }
