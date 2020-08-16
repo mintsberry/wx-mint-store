@@ -19,6 +19,16 @@
   /*height: 360rpx;*/
 }
 
+.regular-img {
+  height: 340rpx;
+}
+
+.regular-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .tags {
   display: flex;
   flex-direction: row;

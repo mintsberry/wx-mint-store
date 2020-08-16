@@ -5,7 +5,8 @@
     "pages/detail/detail",
     "pages/cart/cart",
     "pages/category/category",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -85,6 +85,12 @@
 					"pathName": "pages/category/category",
 					"query": "id=2",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/search/search",
+					"pathName": "pages/search/search",
+					"scene": null
 				}
 			]
 		}

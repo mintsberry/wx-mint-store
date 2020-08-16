@@ -3,7 +3,11 @@ Component({
     tags: Array
   },
   properties: {
-    data: Object
+    data: Object,
+    fixed: {
+      type: Boolean,
+      value: false
+    }
   },
   observers: {
     data: function (data) {

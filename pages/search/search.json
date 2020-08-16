@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "c-search-bar": "../../miniprogram_npm/lin-ui/search-bar/index",
+    "c-spu-preview": "../../components/spu-preview/index",
+    "c-loading": "../../miniprogram_npm/lin-ui/loading/index"
+  }
+}

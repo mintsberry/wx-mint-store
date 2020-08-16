@@ -1,6 +1,6 @@
 <view class="container">
   <view class="search-container">
-    <c-button width="710" height="60" icon="research" icon-size="24" icon-color="#C4C9D2" l-class="search-btn" bind:lintap="onGotoSearch" shape="square">
+    <c-button width="710" height="60" icon="research" icon-size="24" icon-color="#C4C9D2" l-class="search-btn" bind:lintap="goSearch" shape="square">
       搜索商品
     </c-button>
   </view>

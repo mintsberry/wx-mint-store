@@ -1,0 +1,51 @@
+<view class="search">
+  <view class="header">
+    <c-search-bar value="{{keyword}}" show-cancel="{{!search}}" l-class="input" maxlength="9" bg-color="#f1f1f1" bind:linconfirm="onSearch" bind:lincancel="onCancel" placeholder="输入商品名称"></c-search-bar>
+  </view>
+  <view class="container">
+    <view wx:if="{{search}}">
+      <view wx:if="{{historyTags.length !==0 }}" class="history-container">
+        <view class="history-title">
+          <view class="slide"></view>
+          <text>历史搜索</text>
+          <view style="flex:1"></view>
+          <view bind:tap="onDeleteHistory" class="icon">
+            <c-icon name="delete" color="#999999" size="32"></c-icon>
+          </view>
+        </view>
+        <view class="history-tags">
+          <block wx:for="{{historyTags}}" wx:key="index">
+            <c-tag bind:lintap="onSearch" l-class="tag" name="{{item}}">{{item}}</c-tag>
+          </block>
+        </view>
+      </view>
+      <view class="history-container">
+        <view class="history-title">
+          <view class="slide"></view>
+          <text>热门搜索</text>
+          <view style="flex:1"></view>
+        </view>
+        <view class="history-tags">
+          <block wx:for="{{hotTags}}" wx:key="index">
+            <c-tag bind:lintap="onSearch" select="{{item.highlight}}" l-class="tag" l-select-class="tag-selected" name="{{item.title}}">
+              {{item.title}}
+            </c-tag>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="center" wx:if="{{empty}}">
+        <c-icon size="96" color="#00cec9" name="star" l-class='iconfont' />
+        <text class="tip">荒芜的地方</text>
+      </view>
+      <view wx:else class="result">
+        <block wx:for="{{result}}" wx:key="index">
+          <c-spu-preview data="{{item}}" fixed="{{true}}"></c-spu-preview>
+        </block>
+      </view>
+    </view>
+    <c-loading></c-loading>
+    <c-status-show full-screen="{{false}}" show></c-status-show>
+  </view>
+</view>

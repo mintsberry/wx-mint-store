@@ -8,7 +8,7 @@ export class Paging {
   accumulator = []
   locker = false
 
-  constructor(url, count = 0, start = 0) {
+  constructor(url, count = 10, start = 0) {
     this.url = url
     this.start = start
     this.count = count
